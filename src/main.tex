@@ -294,6 +294,24 @@ However, several challenges remain:
 \subsection{Technical Readiness}
 Report on system stability, latency, and throughput based on pilot metrics.
 
+The current demonstrator successfully proves the core technical feasibility of an AI-augmented, federated diagnostic workflow for automotive workshops. 
+During initial testing, the system exhibited stable data transmission from oscilloscopes to the cloud server, with minimal latency and high reliability in both synchronous and asynchronous modes. 
+Data visualization via the local interface and the remote hub functioned effectively, providing technicians with immediate feedback from sensor measurements.
+
+From a throughput perspective, signal samples from multiple oscilloscopes were consistently streamed and rendered without major delay, even in parallel operation. 
+This confirms the robustness of the underlying REST infrastructure implemented during the pilot phase.
+
+Through hands-on work with the demonstrator, several key insights have emerged. 
+Most notably, the clearest value for technicians lies in the immediate "reception" and "visualization" of sensor data—bridging the current diagnostic gap left by standard OBD scans. 
+While conventional tools like VCDS provide a static view of ECU status and DTCs, the live waveform monitoring introduces a new, accessible dimension to vehicle diagnostics.
+
+However, the current system still consists of individually developed components that require manual coordination. 
+Moving forward, a critical step will be to unify these elements into a cohesive software architecture that abstracts complexity for the end user. 
+Additionally, the project now has a solid foundation to expand into "data analysis", including both classical signal processing and machine learning models. 
+These models could detect fault patterns, classify sensor behavior, and support predictive diagnostics—ultimately enabling technicians to make faster and more accurate repair decisions.
+
+
+
 \subsection{Usage and Feedback}
 Summarize technician survey results and adoption rates in participating workshops.
 
