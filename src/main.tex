@@ -274,7 +274,7 @@ By proving a concept of intergration of these three layers, the project will out
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
-  \caption{Legacy GUI: OmniView}
+  \caption{Legacy GUI: OmnAIView}
   \label{fig:gui}
 \end{figure}
 
@@ -287,9 +287,9 @@ By proving a concept of intergration of these three layers, the project will out
 Detail the integrated pilot installation in partner workshops, including hardware setup and user interface snapshots.
 The current demonstrator consists of six primary components:
 \begin{itemize}
-  \item A laptop equipped with OmniView and VCDS software
+  \item A laptop equipped with OmnAIView and VCDS software
   \item A VCDS diagnostic tool
-  \item Four OmniAIScopes
+  \item Four OmnAIScopes
   \item Connection equipment (e.g., cables, Banana-to-BNC adapters)
   \item A formal contract
   \item Instructional materials
@@ -297,9 +297,9 @@ The current demonstrator consists of six primary components:
 In accordance with the proposed workflow for car diagnostics, the process begins with connecting the vehicle to a VCDS device, which performs a standard OBD (on-board diagnostics) scan. 
 As described in the Introduction, this step typically yields vague and sometimes insufficient error codes (DTCs), which are then displayed and recorded on the local laptop.
 
-To improve diagnostic specificity, USB-based oscilloscopes—our OmniAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
+To improve diagnostic specificity, USB-based oscilloscopes—our OmnAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
 Each scope records time-varying voltages from a specific sensor. 
-These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmniView software allows real-time signal visualization and preliminary interpretation.
+These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmnAIView software allows real-time signal visualization and preliminary interpretation.
 
 Collected measurement data is transferred via HTTP from the local hub to a remote web server. 
 The web server then forwards the data to the central THGA server, where it is stored for future analysis. 
@@ -313,7 +313,7 @@ The demonstrator has already been deployed in approximately 50–60 workshop env
 fulfilling the initial goals set out under the Proof-of-Concepts section in the proposed system. 
 However, several challenges remain:
 \begin{itemize}
-  \item The various tools (VCDS, OmniView, hub interface, ML services) have not yet been unified into a single software platform, which limits usability.
+  \item The various tools (VCDS, OmnAIView, hub interface, ML services) have not yet been unified into a single software platform, which limits usability.
   \item Training data volume remains insufficient, restricting the machine learning module’s ability to generate actionable feedback.
 \end{itemize}
 
