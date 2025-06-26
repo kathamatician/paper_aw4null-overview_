@@ -88,7 +88,7 @@ Nevertheless, advanced electrical diagnosis requires recording timely varying vo
 Reiterating the previous argument about cost-benefit ratio of off-board diagnostic systems, this leads to a situation in which a useful tool cannot be trivially deployed to non-prepared auto shops, due to extensive learning curves.
 
 Anyhow, we suspect to enhance teachability and robustness of these tools by employing certain technologies:
-\begin{enumerate}[label=\alph*):]
+\begin{enumerate}
   \item Machine Learning for Signal Clustering
   \item Modern Microcontroller Technology
   \item REST API \& Web Sockets
@@ -118,7 +118,7 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
   \caption{Three different Oscilloscopes}
   \label{fig:scopes}
 \end{figure}
-Review the role of high-speed waveform capture in pinpointing transient faults.
+
 
 \subsubsection{Machine Learning for Signal Clustering}
 \begin{figure}[ht]
@@ -291,7 +291,7 @@ The current demonstrator consists of six primary components:
 \begin{itemize}
   \item A laptop equipped with OmniView and VCDS software
   \item A VCDS diagnostic tool
-  \item Four OmniAIScopes
+  \item Four OmnAIScopes
   \item Connection equipment (e.g., cables, Banana-to-BNC adapters)
   \item A formal contract
   \item Instructional materials
@@ -299,7 +299,7 @@ The current demonstrator consists of six primary components:
 In accordance with the proposed workflow for car diagnostics, the process begins with connecting the vehicle to a VCDS device, which performs a standard OBD (on-board diagnostics) scan. 
 As described in the Introduction, this step typically yields vague and sometimes insufficient error codes (DTCs), which are then displayed and recorded on the local laptop.
 
-To improve diagnostic specificity, USB-based oscilloscopes—our OmniAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
+To improve diagnostic specificity, USB-based oscilloscopes—our OmnAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
 Each scope records time-varying voltages from a specific sensor. 
 These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmniView software allows real-time signal visualization and preliminary interpretation.
 
@@ -351,7 +351,15 @@ Provide statistics on the volume, variety, and quality of collected waveform dat
 
 % 4. Summary
 \section{Summary}
-Recap the key achievements: ecosystem architecture, live diagnostics, and workshop upskilling.
+The Autowerkstatt 4.0 project has made sustainable progress in developing an innovative off-board diagnostics ecosystem for independent auto workshops.
+The proposed architecture integrates USB-based OmnAIScopes, a central data hub, and REST/WebSocket communication protocols, 
+enabling secure and efficient data flow from vehicle sensors to cloud-based analysis servers. 
+The framework facilitates live diagnostics through real-time waveform visualization via the OmniView software, 
+offering improved fault-detection specificity compared to traditional OBD systems.
+Field tests in 50-60 workshops over a six-month period validated the system's technical feasibility, demonstrating stable data transmission 
+and low-latency signal rendering, which provides techinicians with immediate diagnostic insights. 
+While chanllenges such as software unification and the need for larger training datasets for AI-driven diagnostics remains, 
+these accomplishments provide a strong foundation for advancing next-generation automotive diagnostics.
 
 % 5. Outlook
 \section{Outlook}
