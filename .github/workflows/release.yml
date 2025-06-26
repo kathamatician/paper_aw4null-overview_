@@ -1,4 +1,4 @@
-name: LaTeX Release
+name: LaTeX PDF Release
 
 on:
   push:
@@ -6,34 +6,29 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install TeX Live
+      - name: Install TeX + Make
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full make
 
-      - name: Build PDF using Makefile
-        run: make  # or `make all` or a specific target like `make paper.pdf` if defined
+      - name: Build PDF
+        run: make  
 
-      - name: Find PDF artifact
+      - name: Move output PDF
         run: |
-          find . -type f -name "*.pdf"
-        # Just for debugging — optional, remove if not needed
+          mkdir out
+          cp build/*.pdf out/aw4null.pdf
 
-      - name: Rename PDF for release
-        run: |
-          mkdir output
-          cp build/*.pdf output/paper.pdf  # adjust path if PDF lands elsewhere
-
-      - name: Create GitHub Release and upload PDF
+      - name: Upload PDF to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: output/paper.pdf
+          files: out/aw4null.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
