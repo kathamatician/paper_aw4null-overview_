@@ -44,7 +44,7 @@ AI diagnostics, federated learning, automotive workshops, oscilloscopes, GAIA-X,
 \subsection{State of Car Diagnostics}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{obd_device}
+  \includegraphics[width=0.8\linewidth]{figures/obd_device.jpeg}
   \caption{Picture of an OBD device}
   \label{fig:obd}
 \end{figure}
@@ -86,7 +86,7 @@ Nevertheless, advanced electrical diagnosis requires recording timely varying vo
 Reiterating the previous argument about cost-benefit ratio of off-board diagnostic systems, this leads to a situation in which a useful tool cannot be trivially deployed to non-prepared auto shops, due to extensive learning curves.
 
 Anyhow, we suspect to enhance teachability and robustness of these tools by employing certain technologies:
-\begin{enumerate}[label=\alph*:) ]
+\begin{enumerate}[label=\alph*):]
   \item Machine Learning for Signal Clustering
   \item Modern Microcontroller Technology
   \item REST API \& Web Sockets
@@ -94,7 +94,25 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{oscilloscopes}
+
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_old.jpg}
+    \caption{\mbox{Old Oscilloscope}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_autoscope.jpg}
+    \caption{\mbox{Auto Oscilloscope}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_keysight.jpg}
+    \caption{\mbox{Keysight Oscilloscope}}
+  \end{subfigure}
+
   \caption{Three different Oscilloscopes}
   \label{fig:scopes}
 \end{figure}
@@ -103,7 +121,17 @@ Review the role of high-speed waveform capture in pinpointing transient faults.
 \subsubsection{Machine Learning for Signal Clustering}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{waveforms_good_bad}
+  
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/bad.png}
+    \caption{Bad measurement}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/good.jpeg}
+    \caption{Good measurement}
+  \end{subfigure}
+
   \caption{Two waveforms: a bad and a good measurement of a compression cycle}
   \label{fig:waveforms_good_bad}
 \end{figure}
@@ -128,7 +156,7 @@ or smartphone could prove itself as a possible way forward for more robust yet i
 \subsubsection{REST API and Web Sockets}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{data_server_architecture}
+  \includegraphics[width=0.8\linewidth]{figures/data_server_architecture.png}
   \caption{Architecture diagram: scope connected to server via libusb and server providing REST/WebSocket}
   \label{fig:data-server}
 \end{figure}
@@ -160,7 +188,7 @@ In conclusion this means that the middleware between USB-connected oscilloscopes
 \subsection{Overview}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{system_architecture}
+  \includegraphics[width=0.8\linewidth]{figures/aw4null_project_target_flow_to_analyze_data.pdf}
   \caption{Federated ecosystem architecture: data flow from scopes to AI services to technician UI}
   \label{fig:system_architecture}
 \end{figure}
@@ -190,21 +218,23 @@ One of the reasons why this isn't done in autoshops lies in the mathematical com
 Using online services to store data to compare such values to and to calculate these functions out of time domain recordings could be an approach that takes the responsibility for the intellectual overhead.
 By using a USB oscilloscope connected to a GUI program which presents the autoshop worker with clear instructions on how to attach the oscilloscope channels to specific signal lines in the car, sutomatically recording the data and sending it to a service is the key approach of this project. 
 This proposed approach leads to multiple questions that need to be answered:
-\item How can a GUI program support the technician workflow the best?
-\item How can a low-cost yet rugged oscilloscope be manufactured in order to be rolled-out to the majority of workshops without introducing financial or usability barriers?
-\item How can ever-improving analysis models be provided while simultaneously feeding back labled training data to algorithm developers?
-\item Which data privacy aspects need to be considered for providing training data with high significance without opening malicious attack vectors?
-\item How can training data be efficiently distributed to enable model developers to generate significant analysis models for the ever-growing variety of cars?
+\begin{itemize}
+  \item How can a GUI program support the technician workflow the best?
+  \item How can a low-cost yet rugged oscilloscope be manufactured in order to be rolled-out to the majority of workshops without introducing financial or usability barriers?
+  \item How can ever-improving analysis models be provided while simultaneously feeding back labled training data to algorithm developers?
+  \item Which data privacy aspects need to be considered for providing training data with high significance without opening malicious attack vectors?
+  \item How can training data be efficiently distributed to enable model developers to generate significant analysis models for the ever-growing variety of cars?
+\end{itemize}
 
 \subsection{Proof-of-Concepts}
 Summarize laboratory and field tests demonstrating secure data exchange and basic AI inference.
 In order to address these questions, the project aw4null aims to run proof of concept experiments.
 Goals of these experiments are answering to the general fesability as well as to discover more detailed quetions.
 The proposed system can be compartmentalized into the following fields:
-\begin{enumerate} Use cases:
-  \item hardware
+\begin{enumerate}
+  \item Hardware
   \item GUI usability
-  \item data transport and sevice provisioning 
+  \item Data transport and service provisioning 
 \end{enumerate}
 
 \subsubsection{Data Transport and Provisioning}
@@ -236,21 +266,21 @@ By proving a concept of intergration of these three layers, the project will out
 \subsection{Demonstrator}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{early_scope}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
   \caption{Early-Scope measurement prototype}
   \label{fig:early-scope}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{old_gui_omniview}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
   \caption{Legacy GUI: OmniView}
   \label{fig:gui}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{data_api}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
   \caption{Data gathering API interface}
   \label{fig:data-api}
 \end{figure}
@@ -294,12 +324,11 @@ However, several challenges remain:
 \subsection{Technical Readiness}
 Report on system stability, latency, and throughput based on pilot metrics.
 
-The current demonstrator successfully proves the core technical feasibility of an AI-augmented, federated diagnostic workflow for automotive workshops. 
-During initial testing, the system exhibited stable data transmission from oscilloscopes to the cloud server, with minimal latency and high reliability in both synchronous and asynchronous modes. 
-Data visualization via the local interface and the remote hub functioned effectively, providing technicians with immediate feedback from sensor measurements.
+The current demonstrator successfully proves the technical feasibility of a physical data driven diagnostic workflow for automotive workshops. 
+During initial testing, the system exhibited asynchronous data transmission from oscilloscopes to a cloud server.
+Data was visualized via the local interface, providing technicians with immediate feedback from sensor measurements.
 
 From a throughput perspective, signal samples from multiple oscilloscopes were consistently streamed and rendered without major delay, even in parallel operation. 
-This confirms the robustness of the underlying REST infrastructure implemented during the pilot phase.
 
 Through hands-on work with the demonstrator, several key insights have emerged. 
 Most notably, the clearest value for technicians lies in the immediate ``reception'' and ``visualization'' of sensor data—bridging the current diagnostic gap left by standard OBD scans. 
