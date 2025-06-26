@@ -1,24 +1,39 @@
-name: Build and Release PDF
+name: LaTeX Release
 
 on:
   push:
     tags:
-      - 'v*'  # Only run when tags starting with "v" are pushed
+      - 'v*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Makefile (alternative to above if using Make)
-        run: make
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full make
 
-      - name: Upload PDF to release
+      - name: Build PDF using Makefile
+        run: make  # or `make all` or a specific target like `make paper.pdf` if defined
+
+      - name: Find PDF artifact
+        run: |
+          find . -type f -name "*.pdf"
+        # Just for debugging — optional, remove if not needed
+
+      - name: Rename PDF for release
+        run: |
+          mkdir output
+          cp build/*.pdf output/paper.pdf  # adjust path if PDF lands elsewhere
+
+      - name: Create GitHub Release and upload PDF
         uses: softprops/action-gh-release@v2
         with:
-          files: build/*.pdf
+          files: output/paper.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
