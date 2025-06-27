@@ -26,6 +26,14 @@
 % Make the title area
 \maketitle
 
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+
+\fancyfoot[L]{\small\textit{autowerkstatt4null: An Off-Board-Diagnostics Ecosystem for Car-Workshops}}
+\fancyfoot[R]{\thepage}
+
 % Abstract
 \begin{abstract}
 This paper presents Autowerkstatt 4.0, a three-year initiative funded by the German Federal Ministry for Economic Affairs and Climate Action to empower independent automotive workshops with AI-driven, federated diagnostics. 
@@ -44,7 +52,7 @@ AI diagnostics, federated learning, automotive workshops, oscilloscopes, GAIA-X,
 \subsection{State of Car Diagnostics}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{obd_device}
+  \includegraphics[width=0.8\linewidth]{figures/obd_device.jpeg}
   \caption{Picture of an OBD device}
   \label{fig:obd}
 \end{figure}
@@ -86,7 +94,7 @@ Nevertheless, advanced electrical diagnosis requires recording timely varying vo
 Reiterating the previous argument about cost-benefit ratio of off-board diagnostic systems, this leads to a situation in which a useful tool cannot be trivially deployed to non-prepared auto shops, due to extensive learning curves.
 
 Anyhow, we suspect to enhance teachability and robustness of these tools by employing certain technologies:
-\begin{enumerate}[label=\alph*:) ]
+\begin{enumerate}[label=\alph*):]
   \item Machine Learning for Signal Clustering
   \item Modern Microcontroller Technology
   \item REST API \& Web Sockets
@@ -94,7 +102,25 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{oscilloscopes}
+
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_old.jpg}
+    \caption{\mbox{Old Oscilloscope}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_autoscope.jpg}
+    \caption{\mbox{Auto Oscilloscope}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/scope_keysight.jpg}
+    \caption{\mbox{Keysight Oscilloscope}}
+  \end{subfigure}
+
   \caption{Three different Oscilloscopes}
   \label{fig:scopes}
 \end{figure}
@@ -103,7 +129,17 @@ Review the role of high-speed waveform capture in pinpointing transient faults.
 \subsubsection{Machine Learning for Signal Clustering}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{waveforms_good_bad}
+  
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/bad.png}
+    \caption{Bad measurement}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figures/good.jpeg}
+    \caption{Good measurement}
+  \end{subfigure}
+
   \caption{Two waveforms: a bad and a good measurement of a compression cycle}
   \label{fig:waveforms_good_bad}
 \end{figure}
@@ -128,7 +164,7 @@ or smartphone could prove itself as a possible way forward for more robust yet i
 \subsubsection{REST API and Web Sockets}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{data_server_architecture}
+  \includegraphics[width=0.8\linewidth]{figures/data_server_architecture.png}
   \caption{Architecture diagram: scope connected to server via libusb and server providing REST/WebSocket}
   \label{fig:data-server}
 \end{figure}
@@ -158,12 +194,12 @@ In conclusion this means that the middleware between USB-connected oscilloscopes
 % 2. Proposed System
 \section{Proposed System}
 \subsection{Overview}
-\begin{figure}[ht]
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=0.8\linewidth]{system_architecture}
+  \includegraphics[width=\textwidth]{figures/aw4null_project_target_flow_to_analyze_data.pdf}
   \caption{Federated ecosystem architecture: data flow from scopes to AI services to technician UI}
   \label{fig:system_architecture}
-\end{figure}
+\end{figure*}
 Provide a high-level overview of the federated ecosystem, showing secure data flows and component interactions.
 Based on these previous considerations and the evergrowing complexity within cars, on-board-diagnostic solutions don't necessarily capture all the required use cases.
 In this paragraph, a proposed off-board-diagnostic-solution is outlined, which might improve single car shops diagnostics capabilities by employing machine learning and data analytics.
@@ -190,21 +226,23 @@ One of the reasons why this isn't done in autoshops lies in the mathematical com
 Using online services to store data to compare such values to and to calculate these functions out of time domain recordings could be an approach that takes the responsibility for the intellectual overhead.
 By using a USB oscilloscope connected to a GUI program which presents the autoshop worker with clear instructions on how to attach the oscilloscope channels to specific signal lines in the car, sutomatically recording the data and sending it to a service is the key approach of this project. 
 This proposed approach leads to multiple questions that need to be answered:
-\item How can a GUI program support the technician workflow the best?
-\item How can a low-cost yet rugged oscilloscope be manufactured in order to be rolled-out to the majority of workshops without introducing financial or usability barriers?
-\item How can ever-improving analysis models be provided while simultaneously feeding back labled training data to algorithm developers?
-\item Which data privacy aspects need to be considered for providing training data with high significance without opening malicious attack vectors?
-\item How can training data be efficiently distributed to enable model developers to generate significant analysis models for the ever-growing variety of cars?
+\begin{itemize}
+  \item How can a GUI program support the technician workflow the best?
+  \item How can a low-cost yet rugged oscilloscope be manufactured in order to be rolled-out to the majority of workshops without introducing financial or usability barriers?
+  \item How can ever-improving analysis models be provided while simultaneously feeding back labled training data to algorithm developers?
+  \item Which data privacy aspects need to be considered for providing training data with high significance without opening malicious attack vectors?
+  \item How can training data be efficiently distributed to enable model developers to generate significant analysis models for the ever-growing variety of cars?
+\end{itemize}
 
 \subsection{Proof-of-Concepts}
 Summarize laboratory and field tests demonstrating secure data exchange and basic AI inference.
 In order to address these questions, the project aw4null aims to run proof of concept experiments.
 Goals of these experiments are answering to the general fesability as well as to discover more detailed quetions.
 The proposed system can be compartmentalized into the following fields:
-\begin{enumerate} Use cases:
-  \item hardware
+\begin{enumerate}
+  \item Hardware
   \item GUI usability
-  \item data transport and sevice provisioning 
+  \item Data transport and service provisioning 
 \end{enumerate}
 
 \subsubsection{Data Transport and Provisioning}
@@ -236,30 +274,30 @@ By proving a concept of intergration of these three layers, the project will out
 \subsection{Demonstrator}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{early_scope}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
   \caption{Early-Scope measurement prototype}
   \label{fig:early-scope}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{old_gui_omniview}
-  \caption{Legacy GUI: OmniView}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
+  \caption{Legacy GUI: OmnAIView}
   \label{fig:gui}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{data_api}
+  \includegraphics[width=0.8\linewidth]{figures/demosetup.jpg}
   \caption{Data gathering API interface}
   \label{fig:data-api}
 \end{figure}
 Detail the integrated pilot installation in partner workshops, including hardware setup and user interface snapshots.
 The current demonstrator consists of six primary components:
 \begin{itemize}
-  \item A laptop equipped with OmniView and VCDS software
+  \item A laptop equipped with OmnAIView and VCDS software
   \item A VCDS diagnostic tool
-  \item Four OmniAIScopes
+  \item Four OmnAIScopes
   \item Connection equipment (e.g., cables, Banana-to-BNC adapters)
   \item A formal contract
   \item Instructional materials
@@ -267,9 +305,9 @@ The current demonstrator consists of six primary components:
 In accordance with the proposed workflow for car diagnostics, the process begins with connecting the vehicle to a VCDS device, which performs a standard OBD (on-board diagnostics) scan. 
 As described in the Introduction, this step typically yields vague and sometimes insufficient error codes (DTCs), which are then displayed and recorded on the local laptop.
 
-To improve diagnostic specificity, USB-based oscilloscopes—our OmniAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
+To improve diagnostic specificity, USB-based oscilloscopes—our OmnAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
 Each scope records time-varying voltages from a specific sensor. 
-These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmniView software allows real-time signal visualization and preliminary interpretation.
+These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmnAIView software allows real-time signal visualization and preliminary interpretation.
 
 Collected measurement data is transferred via HTTP from the local hub to a remote web server. 
 The web server then forwards the data to the central THGA server, where it is stored for future analysis. 
@@ -279,11 +317,11 @@ The long-term vision involves utilizing this stored signal data to train machine
 However, due to the current lack of sufficient training data in the THGA repository, real-time diagnostic feedback based on these models is not yet operational. 
 This aligns directly with the discussion in Machine Learning for Signal Clustering—highlighting the need for a significant and diverse training dataset before meaningful fault classification can be achieved.
 
-The demonstrator has already been deployed in approximately 50–60 workshop environments over a six-month field test period, 
+The demonstrator has already been deployed in 51 workshop environments over a six-month field test period, 
 fulfilling the initial goals set out under the Proof-of-Concepts section in the proposed system. 
 However, several challenges remain:
 \begin{itemize}
-  \item The various tools (VCDS, OmniView, hub interface, ML services) have not yet been unified into a single software platform, which limits usability.
+  \item The various tools (VCDS, OmnAIView, hub interface, ML services) have not yet been unified into a single software platform, which limits usability.
   \item Training data volume remains insufficient, restricting the machine learning module’s ability to generate actionable feedback.
 \end{itemize}
 
@@ -292,14 +330,11 @@ However, several challenges remain:
 % 3. Results
 \section{Results}
 \subsection{Technical Readiness}
-Report on system stability, latency, and throughput based on pilot metrics.
-
-The current demonstrator successfully proves the core technical feasibility of an AI-augmented, federated diagnostic workflow for automotive workshops. 
-During initial testing, the system exhibited stable data transmission from oscilloscopes to the cloud server, with minimal latency and high reliability in both synchronous and asynchronous modes. 
-Data visualization via the local interface and the remote hub functioned effectively, providing technicians with immediate feedback from sensor measurements.
+The current demonstrator successfully proves the technical feasibility of a physical data driven diagnostic workflow for automotive workshops. 
+During initial testing, the system exhibited asynchronous data transmission from oscilloscopes to a cloud server.
+Data was visualized via the local interface, providing technicians with immediate feedback from sensor measurements.
 
 From a throughput perspective, signal samples from multiple oscilloscopes were consistently streamed and rendered without major delay, even in parallel operation. 
-This confirms the robustness of the underlying REST infrastructure implemented during the pilot phase.
 
 Through hands-on work with the demonstrator, several key insights have emerged. 
 Most notably, the clearest value for technicians lies in the immediate ``reception'' and ``visualization'' of sensor data—bridging the current diagnostic gap left by standard OBD scans. 
@@ -313,17 +348,54 @@ These models could detect fault patterns, classify sensor behavior, and support 
 
 
 \subsection{Usage and Feedback}
-Summarize technician survey results and adoption rates in participating workshops.
+51 workshops were equipped with an experimental system.
+All of which were personally brought to them and users were onboarded in a day-long workshop.
+While a hand full of workshops produced data on a daily basis, other shops were only using the system rather occasionally. 
+The feedack regarding the scope hardware was really good in terms of usability and durability, even though some shops mentioned the physical dimensions of the device being a little too compact for some employees.
+The user-software itself got less good feedback. 
+Especially the GUI which was implemented using dear-imgui, struck the users as "old-fashioned" and not intuitive in its usage.
+Another challenge which was encountered during the testing periode was the situation, that some of the workshops didn't have stable internet connections on their shopfloor.
+This lead to interrupted data-transmission to the servers, while -due to a bug in the implementation- displaying a "successfully sent" message to the user.
+All-in-all the feedback from the workshops was rather satisfying to the project team, even though minor challenges as those mentioned above were encountered.
 
 \subsection{Gathered Data}
-Provide statistics on the volume, variety, and quality of collected waveform datasets.
+The gathered data is curretnly stored in a cephfs storage network located at the THGA in Bochum.
+Right now there is no publicly available dataset, that was extracted.
+It is aimed to publicize statistics of fault-codes, usage and access to training-data within a step. 
 
 % 4. Summary
 \section{Summary}
-Recap the key achievements: ecosystem architecture, live diagnostics, and workshop upskilling.
+The Autowerkstatt 4.0 project has made substantial progress in developing an innovative off-board diagnostics ecosystem for independent automotive workshops. 
+The proposed architecture integrates USB-based OmnAIScopes, a central data hub, and REST/WebSocket communication protocols, 
+enabling secure and efficient data flow from vehicle sensors to cloud-based analysis servers. 
+This framework facilitates live diagnostics through real-time waveform visualization via the OmnAIView software, 
+offering improved fault detection specificity compared to traditional OBD systems. 
+Field tests in 51 workshops over a six-month period validated the system's technical feasibility, 
+demonstrating stable data transmission and low-latency signal rendering, which provides technicians with immediate diagnostic insights. 
+While challenges such as software unification and the need for larger training datasets for AI-driven diagnostics remain, 
+these accomplishments provide a strong foundation for advancing next-generation automotive diagnostics.
 
 % 5. Outlook
 \section{Outlook}
-Discuss future work, including integration of the OmnAIScope platform, advanced federated ML modules, and expanded partner networks under GAIA-X.
+Based on the aw4null project result, researchers, engineers, and application partners are convinced that the proposed, 
+implemented, and tested system shows potential to advance workshop/diagnostics in terms of specificity and ease of use.
+Given these first experimental results, two approaches will be taken to progress with further developments. 
+
+First: a clear road map of future monatization of the project and its results has to be laid out in order to provide an environment for sustainable product development. 
+Even though public and private research funding is, or might be available the Auto-Intern GmbH is determined to release an early derivative of the project's hardware to the general public market. 
+This will lead to further improvements on the actual scope hardware and firmware. 
+Anyhow, due to the nature of this endeavour, and the substantial investment, thus a necessary amortization, hard- and firmware development by the Auto-Intern GmbH will be progressing in closed source. 
+
+Besides of that, three branches of development shall be advanced with as much public and open-source contribution as possible. 
+Use-cases; application-software; as well as storage- and analysis- infrastructure will be organized in independent subgroups, 
+the progress of which can be followed-up on under github.com/OmnAI- project.
+
+%6. Ackowledgement
+\section{Ackowledgement}
+This project was made possible with financial support of Auto-Intern GmbH, LMIS AG, Dekra, Verglöst, nabla-B UG, DMT-LB and its subsidiary THGA.
+All supported by the Federal German Bundesnetzagentur and the GAIA-X Project.
+A detailed list of contributions can be obtained from Lukas Jakubczyk at the University for Applied Sciences THGA in Bochum; lukas.jakubczyk@thga.de, PROLAB für Produkt + Produktion, Technische Hochschule Georg Agricola, Herner Str. 45, DE-44787 Bochum.
+We appreciate the support of all connected Car-Workshops and associated partners. 
+
 
 \end{document}

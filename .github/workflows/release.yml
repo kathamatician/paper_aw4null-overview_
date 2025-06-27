@@ -1,0 +1,34 @@
+name: LaTeX PDF Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install TeX + Make
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full make
+
+      - name: Build PDF (ignore latexmk errors)
+        run: make || true
+
+      - name: Move output PDF
+        run: |
+          mkdir out
+          cp build/main.pdf out/aw4null.pdf
+
+      - name: Upload PDF to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/aw4null.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
