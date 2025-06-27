@@ -26,6 +26,14 @@
 % Make the title area
 \maketitle
 
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+
+\fancyfoot[L]{\small\textit{autowerkstatt4null: An Off-Board-Diagnostics Ecosystem for Car-Workshops}}
+\fancyfoot[R]{\thepage}
+
 % Abstract
 \begin{abstract}
 This paper presents Autowerkstatt 4.0, a three-year initiative funded by the German Federal Ministry for Economic Affairs and Climate Action to empower independent automotive workshops with AI-driven, federated diagnostics. 
@@ -186,12 +194,12 @@ In conclusion this means that the middleware between USB-connected oscilloscopes
 % 2. Proposed System
 \section{Proposed System}
 \subsection{Overview}
-\begin{figure}[ht]
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/aw4null_project_target_flow_to_analyze_data.pdf}
+  \includegraphics[width=\textwidth]{figures/aw4null_project_target_flow_to_analyze_data.pdf}
   \caption{Federated ecosystem architecture: data flow from scopes to AI services to technician UI}
   \label{fig:system_architecture}
-\end{figure}
+\end{figure*}
 Provide a high-level overview of the federated ecosystem, showing secure data flows and component interactions.
 Based on these previous considerations and the evergrowing complexity within cars, on-board-diagnostic solutions don't necessarily capture all the required use cases.
 In this paragraph, a proposed off-board-diagnostic-solution is outlined, which might improve single car shops diagnostics capabilities by employing machine learning and data analytics.
@@ -309,7 +317,7 @@ The long-term vision involves utilizing this stored signal data to train machine
 However, due to the current lack of sufficient training data in the THGA repository, real-time diagnostic feedback based on these models is not yet operational. 
 This aligns directly with the discussion in Machine Learning for Signal Clustering—highlighting the need for a significant and diverse training dataset before meaningful fault classification can be achieved.
 
-The demonstrator has already been deployed in approximately 50–60 workshop environments over a six-month field test period, 
+The demonstrator has already been deployed in 51 workshop environments over a six-month field test period, 
 fulfilling the initial goals set out under the Proof-of-Concepts section in the proposed system. 
 However, several challenges remain:
 \begin{itemize}
@@ -322,8 +330,6 @@ However, several challenges remain:
 % 3. Results
 \section{Results}
 \subsection{Technical Readiness}
-Report on system stability, latency, and throughput based on pilot metrics.
-
 The current demonstrator successfully proves the technical feasibility of a physical data driven diagnostic workflow for automotive workshops. 
 During initial testing, the system exhibited asynchronous data transmission from oscilloscopes to a cloud server.
 Data was visualized via the local interface, providing technicians with immediate feedback from sensor measurements.
@@ -342,27 +348,54 @@ These models could detect fault patterns, classify sensor behavior, and support 
 
 
 \subsection{Usage and Feedback}
-Summarize technician survey results and adoption rates in participating workshops.
+51 workshops were equipped with an experimental system.
+All of which were personally brought to them and users were onboarded in a day-long workshop.
+While a hand full of workshops produced data on a daily basis, other shops were only using the system rather occasionally. 
+The feedack regarding the scope hardware was really good in terms of usability and durability, even though some shops mentioned the physical dimensions of the device being a little too compact for some employees.
+The user-software itself got less good feedback. 
+Especially the GUI which was implemented using dear-imgui, struck the users as "old-fashioned" and not intuitive in its usage.
+Another challenge which was encountered during the testing periode was the situation, that some of the workshops didn't have stable internet connections on their shopfloor.
+This lead to interrupted data-transmission to the servers, while -due to a bug in the implementation- displaying a "successfully sent" message to the user.
+All-in-all the feedback from the workshops was rather satisfying to the project team, even though minor challenges as those mentioned above were encountered.
 
 \subsection{Gathered Data}
-Provide statistics on the volume, variety, and quality of collected waveform datasets.
+The gathered data is curretnly stored in a cephfs storage network located at the THGA in Bochum.
+Right now there is no publicly available dataset, that was extracted.
+It is aimed to publicize statistics of fault-codes, usage and access to training-data within a step. 
 
 % 4. Summary
 \section{Summary}
-\section{Summary}
 The Autowerkstatt 4.0 project has made substantial progress in developing an innovative off-board diagnostics ecosystem for independent automotive workshops. 
-The proposed architecture integrates USB-based OmniAIScopes, a central data hub, and REST/WebSocket communication protocols, 
+The proposed architecture integrates USB-based OmnAIScopes, a central data hub, and REST/WebSocket communication protocols, 
 enabling secure and efficient data flow from vehicle sensors to cloud-based analysis servers. 
 This framework facilitates live diagnostics through real-time waveform visualization via the OmnAIView software, 
 offering improved fault detection specificity compared to traditional OBD systems. 
-Field tests in 50–60 workshops over a six-month period validated the system's technical feasibility, 
+Field tests in 51 workshops over a six-month period validated the system's technical feasibility, 
 demonstrating stable data transmission and low-latency signal rendering, which provides technicians with immediate diagnostic insights. 
 While challenges such as software unification and the need for larger training datasets for AI-driven diagnostics remain, 
 these accomplishments provide a strong foundation for advancing next-generation automotive diagnostics.
 
 % 5. Outlook
 \section{Outlook}
-Discuss future work, including integration of the aAIScope platform, advanced federated ML modules, and expanded partner networks under GAIA-X.
+Based on the aw4null project result, researchers, engineers, and application partners are convinced that the proposed, 
+implemented, and tested system shows potential to advance workshop/diagnostics in terms of specificity and ease of use.
+Given these first experimental results, two approaches will be taken to progress with further developments. 
+
+First: a clear road map of future monatization of the project and its results has to be laid out in order to provide an environment for sustainable product development. 
+Even though public and private research funding is, or might be available the Auto-Intern GmbH is determined to release an early derivative of the project's hardware to the general public market. 
+This will lead to further improvements on the actual scope hardware and firmware. 
+Anyhow, due to the nature of this endeavour, and the substantial investment, thus a necessary amortization, hard- and firmware development by the Auto-Intern GmbH will be progressing in closed source. 
+
+Besides of that, three branches of development shall be advanced with as much public and open-source contribution as possible. 
+Use-cases; application-software; as well as storage- and analysis- infrastructure will be organized in independent subgroups, 
+the progress of which can be followed-up on under github.com/OmnAI- project.
+
+%6. Ackowledgement
+\section{Ackowledgement}
+This project was made possible with financial support of Auto-Intern GmbH, LMIS AG, Dekra, Verglöst, nabla-B UG, DMT-LB and its subsidiary THGA.
+All supported by the Federal German Bundesnetzagentur and the GAIA-X Project.
+A detailed list of contributions can be obtained from Lukas Jakubczyk at the University for Applied Sciences THGA in Bochum; lukas.jakubczyk@thga.de, PROLAB für Produkt + Produktion, Technische Hochschule Georg Agricola, Herner Str. 45, DE-44787 Bochum.
+We appreciate the support of all connected Car-Workshops and associated partners. 
 
 
 \end{document}
