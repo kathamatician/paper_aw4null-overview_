@@ -1,4 +1,4 @@
-PDF       = aw4null-overview-paper.pdf
+PDF       = aw4null-overview.pdf
 SRCDIR    = src
 SRC       = $(SRCDIR)/main.tex
 TEXSRCS   = $(wildcard $(SRCDIR)/**/*.tex)
