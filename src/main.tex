@@ -35,8 +35,10 @@
 \fancyfoot[R]{\thepage}
 
 % Abstract
+% issue 7: goal easy to miss in abstract
 \begin{abstract}
-This paper presents Autowerkstatt 4.0, a three-year initiative funded by the German Federal Ministry for Economic Affairs and Climate Action to empower independent automotive workshops with AI-driven, federated diagnostics. 
+This paper presents Autowerkstatt 4.0, a three-year initiative to empower independent automotive workshops with AI-driven, federated diagnostics. 
+The project is funded by the German Federal Ministry for Economic Affairs and Climate Action. 
 We describe the current state of workshop diagnostics, the enabling technologies, our proposed ecosystem architecture, and initial user feedback. 
 Key outcomes include a modular measurement platform, a secure data-exchange hub, asynchronous online diagnostics, and a learning academy for technician upskilling. 
 Outlook includes integration of advanced AI modules and expanded federated capabilities.
@@ -56,19 +58,24 @@ AI diagnostics, federated learning, automotive workshops, oscilloscopes, GAIA-X,
   \caption{Picture of an OBD device}
   \label{fig:obd}
 \end{figure}
-Modern cars consist of a multitude of electronic, mechanic, and electromechanical subsystems. 
-Market pressure and user demands regarding energy efficiency, comfort and passenger safety lead to an over-increasing complexity in the systems themselves and their interactions. 
-Errorness behaviors in one of the subsystems can lead to various malfunctions. 
-The purpose of car diagnostic systems is supporting technicians to identify the root cause of the malfunction.
+% issue 9: more details in intro
+Modern vehicles integrate numerous interconnected subsystems, including mechanical components like engines and brakes, 
+electronic control units managing sensors and actuators, and electromechanical parts such as electronically controlled valves and motors. 
+Market pressure and user demands regarding energy efficiency, comfort and passenger safety lead to an over-increasing complexity in the systems themselves and their interactions.
+Diagnostic tools must therefore analyze data across these diverse systems, such as engine management, braking systems, airbag controllers, 
+and advanced driver-assistance features, to effectively identify the root cause of the malfunction.
 
 Design goals for these car diagnostic systems are multiple:
--clarity and specificity of the erroneous part
--usability: easy to use correctly and hard to use incorrectly; teachability
--robustness against physical damage
--pricing
--costs of illformed diagnostics
-
-Since some faults can lead to degraded combustion behaviors without noticeable effects for the car’s operator, some of these diagnostic systems have to be built into the car while others may reside in a sophisticated auto workshop, thus giving us the differentiation between on-board diagnostic and off-board diagnostic. 
+\begin{itemize}
+  \item Clarity and specificity of the erroneous part
+  \item Usability: easy to use correctly and hard to use incorrectly; teachability
+  \item Robustness against physical damage
+  \item Pricing
+  \item Costs of illformed diagnostics
+\end{itemize}
+Since some faults can lead to degraded combustion behaviors without noticeable effects for the car’s operator, 
+some of these diagnostic systems have to be built into the car while others may reside in a sophisticated auto workshop, 
+thus giving us the differentiation between on-board diagnostic and off-board diagnostic. 
 According to this very definition, on-board diagnostic tools get delivered with each and every individual car itself, hence adding a) more costs; b) more weight; c) more complexity to the car.
 
 It is therefore that auto manufacturers are trying to reduce the amount and extent of these systems to the least possible amount. 
@@ -77,21 +84,34 @@ In opposition to that, off-board systems do not need to be built into every car,
 The market pressure for those tools arises out of the situation that mechanics get paid for maintaining and repairing a car but not necessarily the diagnostics itself. 
 That’s why the evaluation of the cost-benefit ratios looks likely different for these tools.
 
+% issue 10: how does error detection currently work
+When a diagnostic need arises in an auto workshop, technicians typically rely on specialized off-board diagnostic tools. 
+These tools connect to the vehicle’s onboard systems via standardized interfaces such as the OBD-II port. 
+Commonly used diagnostic devices include scan tools and code readers from vendors like Bosch, Snap-on, Autel, and Launch. 
+These tools allow workshops to read error codes, perform system tests, and monitor sensor data to pinpoint faults. 
+Despite their effectiveness, these devices can be costly and often require regular updates to keep up with evolving vehicle technologies and manufacturer protocols.
+
 \subsection{Future Challenges in ICEV and BEV}
 Diversification in the set of cars also leads to a diversification in diagnostics. 
 One particular fork in the road appears to be the further differentiation between internal combustion engine vehicles – ICEV; and battery electric vehicles – BEV. 
 Both technologies confront auto shops with different diagnostic challenges. 
 Yet both have in common that they include electrical signals and purely mechanical parts. 
-While fault diagnostics of the purely mechanical parts of the car, e.g. suspension hinges, brakes, and fenders, can be categorized as a traditional craft, the diagnostics of peculiar electrical signals is as diverse as the ever-increasing amount of electrical assistant systems. 
+While fault diagnostics of the purely mechanical parts of the car, e.g. suspension hinges, brakes, and fenders, can be categorized as a traditional craft, 
+the diagnostics of peculiar electrical signals is as diverse as the ever-increasing amount of electrical assistant systems. 
 A commonly used diagnostic tool for electrical fault analysis is the oscilloscope, which has been used in its traditional and auto shop specific variations by car technicians since the 1960s.
 
 \subsection{Interesting Technologies for Upcoming Car Diagnostic Systems}
-An oscilloscope is an electrical device with the purpose of projecting a time varying voltage (oscillation) onto a visible plane (scope), and with that displaying analytical features of the voltage visibly.
+An oscilloscope is an electrical device with the purpose of projecting a time varying voltage (oscillation) onto a visible plane (scope), 
+and with that displaying analytical features of the voltage visibly.
+Different models of oscilloscopes vary in complexity and features, as shown in Figure~\ref{fig:scopes}, 
+which presents examples ranging from a traditional analog scope to more advanced digital and auto-scopes.
 
-Working with oscilloscopes requires a certain depth of electrical understanding as well as proper handling of the necessary components, and well-trained pattern recognition of the recorded signals. 
+Working with oscilloscopes requires a certain depth of electrical understanding as well as proper handling of the necessary components, 
+and well-trained pattern recognition of the recorded signals. 
 These three qualities decrease the level of teachability significantly. 
 Nevertheless, advanced electrical diagnosis requires recording timely varying voltages on an indicator of healthy or unhealthy behavior. 
-Reiterating the previous argument about cost-benefit ratio of off-board diagnostic systems, this leads to a situation in which a useful tool cannot be trivially deployed to non-prepared auto shops, due to extensive learning curves.
+Reiterating the previous argument about cost-benefit ratio of off-board diagnostic systems, 
+this leads to a situation in which a useful tool cannot be trivially deployed to non-prepared auto shops, due to extensive learning curves.
 
 Anyhow, we suspect to enhance teachability and robustness of these tools by employing certain technologies:
 \begin{enumerate}[label=\alph*):]
@@ -103,19 +123,23 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
 \begin{figure}[ht]
   \centering
 
-  \begin{subfigure}[b]{0.3\linewidth}
+  \begin{subfigure}[b]{0.7\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/scope_old.jpg}
     \caption{\mbox{Old Oscilloscope}}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.3\linewidth}
+
+  \vspace{0.5cm}
+
+  \begin{subfigure}[b]{0.7\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/scope_autoscope.jpg}
     \caption{\mbox{Auto Oscilloscope}}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.3\linewidth}
+
+  \vspace{0.5cm}
+
+  \begin{subfigure}[b]{0.7\linewidth}
     \centering
     \includegraphics[width=\linewidth]{figures/scope_keysight.jpg}
     \caption{\mbox{Keysight Oscilloscope}}
@@ -124,7 +148,15 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
   \caption{Three different Oscilloscopes}
   \label{fig:scopes}
 \end{figure}
-Review the role of high-speed waveform capture in pinpointing transient faults.
+% Review the role of high-speed waveform capture in pinpointing transient faults.
+High-speed waveform capture plays a crucial role in pinpointing transient faults—those brief, 
+often sporadic anomalies in electrical signals that can be easily missed by slower measurement tools. 
+Transient faults in vehicle subsystems, such as voltage spikes, intermittent sensor glitches, or short-lived communication errors, 
+may not produce persistent error codes yet can significantly affect system performance or lead to cascading failures. 
+Oscilloscopes capable of capturing and storing high-frequency waveforms enable technicians to observe these fleeting events in real time, 
+providing detailed insights into the signal characteristics and timing relationships that traditional diagnostic methods may overlook. 
+By accurately recording these transient behaviors, high-speed capture tools empower mechanics and engineers to diagnose root causes more effectively, 
+reducing trial-and-error repairs and improving overall vehicle reliability.
 
 \subsubsection{Machine Learning for Signal Clustering}
 \begin{figure}[ht]
@@ -156,10 +188,16 @@ Traditional oscilloscopes usually come as all-in-one boxes, with high-accuracy a
 All of the mentioned parts are usually not meant for rough environments such as auto workshops. 
 Specially designed electronic oscilloscopes that come in ruggedized cases may end up costing multiple thousands of euros.
 
+% issue 14: Discussion of technical requirements
 So far, regular microcontrollers have not been used in oscilloscopes. 
-However, recent generations of microcontrollers feature speeds that are high enough for sampling measurements in some auto shop use cases. 
-In comparison to faster but also more expensive alternatives (e.g. FPGA, …), developing a sampling oscilloscope on a microcontroller basis with a USB interface to a regular computer, tablet, 
-or smartphone could prove itself as a possible way forward for more robust yet inexpensive auto shop oscilloscopes.
+However, recent generations of microcontrollers offer sampling speeds in the low to mid MHz range, which can be sufficient for capturing many automotive signals, 
+such as ignition pulses (typically up to a few hundred kilohertz) or communication protocols like CAN bus (~500 kHz). 
+Typical fault-related signals in cars tend to lie well below 1 MHz, with transient events often occurring on the order of microseconds to milliseconds.
+
+Given these characteristics, microcontrollers capable of sampling at 1–5 MHz with adequate memory for capturing durations ranging from 
+milliseconds to seconds could provide meaningful diagnostic data for many use cases in auto shops. 
+Compared to faster but more expensive alternatives like FPGAs, developing a sampling oscilloscope on a microcontroller basis with a USB interface to a regular computer, 
+tablet, or smartphone could prove a viable way forward toward more robust yet inexpensive diagnostic tools tailored for the workshop environment.
 
 \subsubsection{REST API and Web Sockets}
 \begin{figure}[ht]
@@ -170,7 +208,8 @@ or smartphone could prove itself as a possible way forward for more robust yet i
 \end{figure}
 Since the two cornerstones — machine learning and microcontroller - based oscilloscopes — have been identified by now, the challenge of connecting them has to be addressed.
 
-Since Machine Learning models require certain amounts of training data as well as centralized compute power, the according analysis models can be more easily run on centralized servers than on individual auto shop workstations. 
+Since Machine Learning models require certain amounts of training data as well as centralized compute power, 
+the according analysis models can be more easily run on centralized servers than on individual auto shop workstations. 
 Yet, the data acquisition with the microcontroller oscilloscopes has to be performed on-site at the auto shop. 
 Connecting these two modules could be done in a multitude of ways.
 
@@ -178,10 +217,14 @@ With the increasing employment of web technologies — especially HTTP (Hypertex
 While doing that, the fundamental architecture needs to encompass two different modes of communication: asynchronous and synchronous.
 
 \paragraph{Asynchronous Communication}
+% issue 15: incorrect statement about rest and http
 Asynchronous communication is not dependent on both ends of a communication channel having the same concept of time. 
 This results in a certain pattern of communication that can also be described as a request–response model. 
-One implementation using HTTP is REST (Representational State Transfer). 
-These communication methods can be used to send a structured package of acquired data, including a recorded time series of a voltage as well as relevant metadata about this measurement, such as milage, sensor type, make-and-model of a car to a server’s interface called API. 
+One common approach to implement this model on the web is through REST (Representational State Transfer), an architectural style for designing networked applications. 
+HTTP (Hypertext Transfer Protocol) is a protocol that implements RESTful communication by defining how requests and responses are formatted and exchanged \cite{Fielding2000}.
+
+These communication methods can be used to send a structured package of acquired data, including a recorded time series of a voltage as well as relevant metadata about this measurement, 
+such as milage, sensor type, make-and-model of a car to a server’s interface called API. 
 The server then has a certain amount of time to analyze the posted data, compare it against the internal database, formulate a response with a diagnosis and send it back to the requesting client.
 
 \paragraph{Synchronous Communication}
@@ -397,5 +440,6 @@ All supported by the Federal German Bundesnetzagentur and the GAIA-X Project.
 A detailed list of contributions can be obtained from Lukas Jakubczyk at the University for Applied Sciences THGA in Bochum; lukas.jakubczyk@thga.de, PROLAB für Produkt + Produktion, Technische Hochschule Georg Agricola, Herner Str. 45, DE-44787 Bochum.
 We appreciate the support of all connected Car-Workshops and associated partners. 
 
-
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 \end{document}
