@@ -7,7 +7,7 @@ LATEXMK_OPTS = -pdf \
                -interaction=nonstopmode \
                -usepretex="\PassOptionsToPackage{draft}{graphicx}" \
                -pdflatex="pdflatex %O %S" \
-               -output-directory=build
+               -output-directory=build \
 	       -jobname=aw4null-overview
 
 .PHONY: all draft clean
