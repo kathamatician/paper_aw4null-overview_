@@ -16,21 +16,23 @@ jobs:
       - name: Install TeX + Make
         run: |
           sudo apt-get update
-          sudo apt install `sudo apt --assume-no install texlive-full | \
-		awk '/The following additional packages will be installed/{f=1;next} /Suggested packages/{f=0} f' | \
-		tr ' ' '\n' | grep -vP 'doc$' | grep -vP 'texlive-lang' | grep -vP 'latex-cjk' | tr '\n' ' '`
-
+          sudo apt-get install -y \
+           texlive-latex-recommended \
+           texlive-latex-extra \
+           texlive-fonts-recommended \
+           latexmk \
+           lmodern
       - name: Build PDF (ignore latexmk errors)
         run: make || true
 
-      - name: Move output PDF
-        run: |
-          mkdir out
-          cp build/main.pdf out/aw4null.pdf
+#      - name: Move output PDF
+#       run: |
+#          mkdir out
+#          cp build/aw4null-overview.pdf out/aw4null.pdf
 
       - name: Upload PDF to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: out/aw4null.pdf
+          files: build/aw4null-overview.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
