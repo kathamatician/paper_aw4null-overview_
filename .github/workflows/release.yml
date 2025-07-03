@@ -25,10 +25,6 @@ jobs:
       - name: Build PDF (ignore latexmk errors)
         run: make || true
 
-#      - name: Move output PDF
-#       run: |
-#          mkdir out
-#          cp build/aw4null-overview.pdf out/aw4null.pdf
 
       - name: Upload PDF to Release
         uses: softprops/action-gh-release@v2
