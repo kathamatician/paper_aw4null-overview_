@@ -8,6 +8,7 @@ LATEXMK_OPTS = -pdf \
                -usepretex="\PassOptionsToPackage{draft}{graphicx}" \
                -pdflatex="pdflatex %O %S" \
                -output-directory=build
+	       -jobname=aw4null-overview
 
 .PHONY: all draft clean
 

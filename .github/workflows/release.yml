@@ -16,7 +16,9 @@ jobs:
       - name: Install TeX + Make
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full make
+          sudo apt install `sudo apt --assume-no install texlive-full | \
+		awk '/The following additional packages will be installed/{f=1;next} /Suggested packages/{f=0} f' | \
+		tr ' ' '\n' | grep -vP 'doc$' | grep -vP 'texlive-lang' | grep -vP 'latex-cjk' | tr '\n' ' '`
 
       - name: Build PDF (ignore latexmk errors)
         run: make || true
