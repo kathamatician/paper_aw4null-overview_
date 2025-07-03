@@ -37,7 +37,7 @@
 % Abstract
 % issue 7: goal easy to miss in abstract
 \begin{abstract}
-This paper presents Autowerkstatt 4.0, a three-year initiative to empower independent automotive workshops with AI-driven, federated diagnostics. 
+This paper presents Autowerkstatt4null, a three-year initiative to empower independent automotive workshops with AI-driven, federated diagnostics. 
 The project is funded by the German Federal Ministry for Economic Affairs and Climate Action. 
 We describe the current state of workshop diagnostics, the enabling technologies, our proposed ecosystem architecture, and initial user feedback. 
 Key outcomes include a modular measurement platform, a secure data-exchange hub, asynchronous online diagnostics, and a learning academy for technician upskilling. 
@@ -88,6 +88,7 @@ That’s why the evaluation of the cost-benefit ratios looks likely different fo
 When a diagnostic need arises in an auto workshop, technicians typically rely on specialized off-board diagnostic tools. 
 These tools connect to the vehicle’s onboard systems via standardized interfaces such as the OBD-II port. 
 Commonly used diagnostic devices include scan tools and code readers from vendors like Bosch, Snap-on, Autel, and Launch. 
+An essential diagnostic tool for electrical fault analysis is the oscilloscope, which has been used in its traditional and auto shop specific variations by car technicians since the 1960s.
 These tools allow workshops to read error codes, perform system tests, and monitor sensor data to pinpoint faults. 
 Despite their effectiveness, these devices can be costly and often require regular updates to keep up with evolving vehicle technologies and manufacturer protocols.
 
@@ -98,7 +99,6 @@ Both technologies confront auto shops with different diagnostic challenges.
 Yet both have in common that they include electrical signals and purely mechanical parts. 
 While fault diagnostics of the purely mechanical parts of the car, e.g. suspension hinges, brakes, and fenders, can be categorized as a traditional craft, 
 the diagnostics of peculiar electrical signals is as diverse as the ever-increasing amount of electrical assistant systems. 
-A commonly used diagnostic tool for electrical fault analysis is the oscilloscope, which has been used in its traditional and auto shop specific variations by car technicians since the 1960s.
 
 \subsection{Interesting Technologies for Upcoming Car Diagnostic Systems}
 An oscilloscope is an electrical device with the purpose of projecting a time varying voltage (oscillation) onto a visible plane (scope), 
@@ -177,8 +177,9 @@ reducing trial-and-error repairs and improving overall vehicle reliability.
 \end{figure}
 Programed computer functions can be understood as mappings of a domain to a codomain, where the domain is vulgarly referred to as input data and the codomain as output data. 
 During the 1950s, researchers at Bell Laboratories and the Institute for Advanced Study in Princeton proposed that such programmatic functions could be executed autonomously by computer systems themselves 
-— an idea that anticipated what is now formalized as the Universal Approximation Theorem Since then, this niche idea has evolved into a scientific discipline called Artificial Intelligence and Machine Learning. 
-Latest advances in this area did demonstrate useful opportunities. 
+— an idea that anticipated what is now formalized as the Universal Approximation Theorem  \cite{Cybenko1989, Hornik1991}. 
+Since then, this niche idea has evolved into a scientific discipline called Artificial Intelligence and Machine Learning \cite{RussellNorvig2020, Goodfellow2016}. 
+Latest advances in this area did demonstrate useful opportunities \cite{LeCun2015, Silver2016}. 
 It can thus be imagined to define an abstract function that maps a multidimensional time dependent vector of electrical quantities, also known as time series, to a certain fault category. 
 From the toolkit of machine learning, multiple technologies could be interesting from a research stand point to generate such a function or group of functions, though all having in common a need for training data. 
 The implementation of any of those functions could increase the specificity of fault identification while simultaneously decreasing the amount of training necessary for a mechanic to analyze signals.
