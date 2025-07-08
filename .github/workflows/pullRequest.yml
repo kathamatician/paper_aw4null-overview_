@@ -19,13 +19,8 @@ jobs:
       - name: Build PDF (ignore latexmk errors)
         run: make || true
 
-      - name: Move output PDF
-        run: |
-          mkdir out
-          cp build/main.pdf out/aw4null.pdf
-
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: LaTeX-PDF
-          path: out/aw4null.pdf
+          path: build/build/aw4null-overview.pdf
