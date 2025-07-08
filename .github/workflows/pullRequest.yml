@@ -23,4 +23,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LaTeX-PDF
-          path: build/build/aw4null-overview.pdf
+          path: build/aw4null-overview.pdf
