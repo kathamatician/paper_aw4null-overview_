@@ -101,7 +101,7 @@ While fault diagnostics of the purely mechanical parts of the car, e.g. suspensi
 the diagnostics of peculiar electrical signals is as diverse as the ever-increasing amount of electrical assistant systems. 
 
 \subsection{Interesting Technologies for Upcoming Car Diagnostic Systems}
-Oscilloscopes are among the few tools that allow automotive technicians to observe real-time electrical behavior—something static diagnostic codes alone cannot reveal. They are used to pinpoint faults like voltage dropouts, transient glitches, or signal distortion, especially in sensors and control lines. This makes them indispensable for diagnosing elusive issues that don’t result in stored diagnostic trouble codes (DTCs).
+Oscilloscopes are among the few tools that allow automotive technicians to observe real-time electrical behavior-something static diagnostic codes alone cannot reveal. They are used to pinpoint faults like voltage dropouts, transient glitches, or signal distortion, especially in sensors and control lines. This makes them indispensable for diagnosing elusive issues that don’t result in stored diagnostic trouble codes (DTCs).
 
 However, effective oscilloscope usage requires electrical knowledge, correct probe handling, and experience in waveform interpretation. These barriers make oscilloscopes impractical for many general-purpose workshops. As a result, only a small group of specialists can currently harness their full potential.
 
@@ -153,7 +153,7 @@ Anyhow, we suspect to enhance teachability and robustness of these tools by empl
   \label{fig:scopes}
 \end{figure}
 % Review the role of high-speed waveform capture in pinpointing transient faults.
-High-speed waveform capture plays a crucial role in pinpointing transient faults—those brief, 
+High-speed waveform capture plays a crucial role in pinpointing transient faults-those brief, 
 often sporadic anomalies in electrical signals that can be easily missed by slower measurement tools. 
 Transient faults in vehicle subsystems, such as voltage spikes, intermittent sensor glitches, or short-lived communication errors, 
 may not produce persistent error codes yet can significantly affect system performance or lead to cascading failures. 
@@ -181,12 +181,12 @@ reducing trial-and-error repairs and improving overall vehicle reliability.
 \end{figure}
 Programed computer functions can be understood as mappings of a domain to a codomain, where the domain is vulgarly referred to as input data and the codomain as output data. 
 During the 1950s, researchers at Bell Laboratories and the Institute for Advanced Study in Princeton proposed that such programmatic functions could be executed autonomously by computer systems themselves 
-— an idea that anticipated what is now formalized as the Universal Approximation Theorem  \cite{Cybenko1989, Hornik1991}. 
+- an idea that anticipated what is now formalized as the Universal Approximation Theorem  \cite{Cybenko1989, Hornik1991}. 
 Since then, this niche idea has evolved into a scientific discipline called Artificial Intelligence and Machine Learning \cite{RussellNorvig2020, Goodfellow2016}. 
 Latest advances in this area did demonstrate useful opportunities \cite{LeCun2015, Silver2016}. 
 It can thus be imagined to define an abstract function that maps a multidimensional time dependent vector of electrical quantities, also known as time series, to a certain fault category. 
 From the toolkit of machine learning, multiple technologies could be interesting from a research stand point to generate such a function or group of functions, though all having in common a need for training data. 
-By automating signal interpretation, the implementation of such functions can reduce the need for manual waveform analysis, lowering the level of expertise required and thus decreasing the amount of technician training necessary—while improving diagnostic reproducibility.
+By automating signal interpretation, the implementation of such functions can reduce the need for manual waveform analysis, lowering the level of expertise required and thus decreasing the amount of technician training necessary-while improving diagnostic reproducibility.
 
 \subsubsection{Modern Microcontroller Technology}
 Traditional oscilloscopes usually come as all-in-one boxes, with high-accuracy analog front-ends and delicate signal processing units to display the measured voltages on a built-in screen. 
@@ -211,14 +211,14 @@ tablet, or smartphone could prove a viable way forward toward more robust yet in
   \caption{Architecture diagram: scope connected to server via libusb and server providing REST/WebSocket}
   \label{fig:data-server}
 \end{figure}
-Since the two cornerstones — machine learning and microcontroller - based oscilloscopes — have been identified by now, the challenge of connecting them has to be addressed.
+Since the two cornerstones - machine learning and microcontroller - based oscilloscopes - have been identified by now, the challenge of connecting them has to be addressed.
 
 Since Machine Learning models require certain amounts of training data as well as centralized compute power, 
 the according analysis models can be more easily run on centralized servers than on individual auto shop workstations. 
 Yet, the data acquisition with the microcontroller oscilloscopes has to be performed on-site at the auto shop. 
 Connecting these two modules could be done in a multitude of ways.
 
-With the increasing employment of web technologies — especially HTTP (Hypertext Transfer Protocol)— it can be assumed that handling the data from acquisition to analysis could be implemented in an open-source approach. 
+With the increasing employment of web technologies - especially HTTP (Hypertext Transfer Protocol)- it can be assumed that handling the data from acquisition to analysis could be implemented in an open-source approach. 
 While doing that, the fundamental architecture needs to encompass two different modes of communication: asynchronous and synchronous.
 
 \paragraph{Asynchronous Communication}
@@ -346,7 +346,7 @@ The current demonstrator consists of six primary components:
 In accordance with the proposed workflow for car diagnostics, the process begins with connecting the vehicle to a VCDS device, which performs a standard OBD (on-board diagnostics) scan. 
 As described in the Introduction, this step typically yields vague and sometimes insufficient error codes (DTCs), which are then displayed and recorded on the local laptop.
 
-To improve diagnostic specificity, USB-based oscilloscopes—our OmnAIScopes—are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
+To improve diagnostic specificity, USB-based oscilloscopes-our OmnAIScopes-are connected to various electrical sensors in the vehicle using Banana-to-BNC adapters. 
 Each scope records time-varying voltages from a specific sensor. 
 These scopes are linked via a central hub, which aggregates signals and routes them to the local laptop, where the OmnAIView software allows real-time signal visualization and preliminary interpretation.
 
@@ -356,7 +356,7 @@ This architecture aligns with the proposed use of REST APIs for asynchronous com
 
 The long-term vision involves utilizing this stored signal data to train machine learning models capable of classifying faults based on signal patterns. 
 However, due to the current lack of sufficient training data in the THGA repository, real-time diagnostic feedback based on these models is not yet operational. 
-This aligns directly with the discussion in Machine Learning for Signal Clustering—highlighting the need for a significant and diverse training dataset before meaningful fault classification can be achieved.
+This aligns directly with the discussion in Machine Learning for Signal Clustering-highlighting the need for a significant and diverse training dataset before meaningful fault classification can be achieved.
 
 The demonstrator has already been deployed in 51 workshop environments over a six-month field test period, 
 fulfilling the initial goals set out under the Proof-of-Concepts section in the proposed system. 
@@ -378,13 +378,13 @@ Data was visualized via the local interface, providing technicians with immediat
 From a throughput perspective, signal samples from multiple oscilloscopes were consistently streamed and rendered without major delay, even in parallel operation. 
 
 Through hands-on work with the demonstrator, several key insights have emerged. 
-Most notably, the clearest value for technicians lies in the immediate ``reception'' and ``visualization'' of sensor data—bridging the current diagnostic gap left by standard OBD scans. 
+Most notably, the clearest value for technicians lies in the immediate ``reception'' and ``visualization'' of sensor data-bridging the current diagnostic gap left by standard OBD scans. 
 While conventional tools like VCDS provide a static view of ECU status and DTCs, the live waveform monitoring introduces a new, accessible dimension to vehicle diagnostics.
 
 However, the current system still consists of individually developed components that require manual coordination. 
 Moving forward, a critical step will be to unify these elements into a cohesive software architecture that abstracts complexity for the end user. 
 Additionally, the project now has a solid foundation to expand into ``data analysis'', including both classical signal processing and machine learning models. 
-These models could detect fault patterns, classify sensor behavior, and support predictive diagnostics—ultimately enabling technicians to make faster and more accurate repair decisions.
+These models could detect fault patterns, classify sensor behavior, and support predictive diagnostics-ultimately enabling technicians to make faster and more accurate repair decisions.
 
 
 
