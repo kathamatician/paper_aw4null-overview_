@@ -101,8 +101,12 @@ While fault diagnostics of the purely mechanical parts of the car, e.g. suspensi
 the diagnostics of peculiar electrical signals is as diverse as the ever-increasing amount of electrical assistant systems. 
 
 \subsection{Interesting Technologies for Upcoming Car Diagnostic Systems}
-An oscilloscope is an electrical device with the purpose of projecting a time varying voltage (oscillation) onto a visible plane (scope), 
-and with that displaying analytical features of the voltage visibly.
+Oscilloscopes are among the few tools that allow automotive technicians to observe real-time electrical behavior—something static diagnostic codes alone cannot reveal. They are used to pinpoint faults like voltage dropouts, transient glitches, or signal distortion, especially in sensors and control lines. This makes them indispensable for diagnosing elusive issues that don’t result in stored diagnostic trouble codes (DTCs).
+
+However, effective oscilloscope usage requires electrical knowledge, correct probe handling, and experience in waveform interpretation. These barriers make oscilloscopes impractical for many general-purpose workshops. As a result, only a small group of specialists can currently harness their full potential.
+
+Now, with the availability of modern microcontrollers, GUI-driven workflows, and automated analysis powered by machine learning, we aim to reduce the learning curve and increase the accessibility of oscilloscope diagnostics.
+
 Different models of oscilloscopes vary in complexity and features, as shown in Figure~\ref{fig:scopes}, 
 which presents examples ranging from a traditional analog scope to more advanced digital and auto-scopes.
 
@@ -225,7 +229,7 @@ One common approach to implement this model on the web is through REST (Represen
 HTTP (Hypertext Transfer Protocol) is a protocol that implements RESTful communication by defining how requests and responses are formatted and exchanged \cite{Fielding2000}.
 
 These communication methods can be used to send a structured package of acquired data, including a recorded time series of a voltage as well as relevant metadata about this measurement, 
-such as milage, sensor type, make-and-model of a car to a server’s interface called API. 
+such as mileage, sensor type, make-and-model of a car to a server’s interface called API. 
 The server then has a certain amount of time to analyze the posted data, compare it against the internal database, formulate a response with a diagnosis and send it back to the requesting client.
 
 \paragraph{Synchronous Communication}
@@ -250,9 +254,9 @@ Since the central entity of off-board diagnostics is ususally a techinician with
 
 \paragraph{Technician Workflow}
 A customer's car enters a workshop. 
-The first step taken in some cases is the full on-board-diagnostic scan resulting in a protocal of the quiry of all in the car available engine control units (abbr. ECU). 
-This protocal encampsulates the status in which the car enters the workshop, compiling information such as milage, ECU series numbers, installed system with according hardware and software versions as well as potentially stored diagnostic trouble codes.
-It is this protocal that can hint the technician to necessary maintenance or repair actions.
+The first step taken in some cases is the full on-board-diagnostic scan resulting in a protocol of the quiry of all in the car available engine control units (abbr. ECU). 
+This protocol encapsulates the status in which the car enters the workshop, compiling information such as milage, ECU series numbers, installed system with according hardware and software versions as well as potentially stored diagnostic trouble codes.
+It is this protocol that can hint the technician to necessary maintenance or repair actions.
 Unfortunately, due to the lack of sophistication of some of the on-board-diagnostic systems, DTCs don't always point out a problem in the most obvious way. 
 An example for this is the diagnostic trouble code <DTC>
 \todo[inline]{enter correct dtc here}
@@ -263,11 +267,11 @@ After analyzing the set of trouble codes, a technician will always resort to dif
 In case of the demostrated DTC, this might include validating the correct supply voltage to the sensor itself; 
 validating the supply voltage to the motor control unit; validating the produced fuel pressure by utilizing an external pressure gauge; and validating the ohmic resistance of the signal line with a multi meter.
 This differential diagnostic search tree is used and ordered to rule out one possible problem after another.
-Depending on the read-out trouble codes, such a search tree might take up to hours or even days, resulting not only in a lenghty waiting process for the workshop's customer, but also hassle for the autoshop itself in terms of inner shop logistics.
+Depending on the read-out trouble codes, such a search tree might take up to hours or even days, resulting not only in a lenghty waiting process for the workshop's customer, but also hassle for the auto shop itself in terms of inner shop logistics.
 In this very case, one single oscilloscope measurement measuring the signal on the line at the sensor connector and the motor controller connector could have been used to calculate the signal's transfer function $H(s)$ to rule out a whole plathora of electrical problems.
-One of the reasons why this isn't done in autoshops lies in the mathematical complexity of this action itself as well as in non-existing data to compare the resulting transfer function to.
+One of the reasons why this isn't done in auto shops lies in the mathematical complexity of this action itself as well as in non-existing data to compare the resulting transfer function to.
 Using online services to store data to compare such values to and to calculate these functions out of time domain recordings could be an approach that takes the responsibility for the intellectual overhead.
-By using a USB oscilloscope connected to a GUI program which presents the autoshop worker with clear instructions on how to attach the oscilloscope channels to specific signal lines in the car, sutomatically recording the data and sending it to a service is the key approach of this project. 
+By using a USB oscilloscope connected to a GUI program which presents the auto shop worker with clear instructions on how to attach the oscilloscope channels to specific signal lines in the car, automatically recording the data and sending it to a service is the key approach of this project. 
 This proposed approach leads to multiple questions that need to be answered:
 \begin{itemize}
   \item How can a GUI program support the technician workflow the best?
@@ -279,7 +283,7 @@ This proposed approach leads to multiple questions that need to be answered:
 
 \subsection{Proof-of-Concepts}
 In order to address these questions, the project \textbf{autowerkstatt4null} aims to run proof of concept experiments.
-Goals of these experiments are answering to the general fesability as well as to discover more detailed quetions.
+Goals of these experiments are answering to the general feasibility as well as to discover more detailed questions.
 The proposed system can be compartmentalized into the following fields:
 \begin{enumerate}
   \item Hardware
@@ -297,18 +301,18 @@ Analytical models can be conceptualized as functions $Analysis = Model(Measureme
 This function needs to be evaluated on a machine.
 Since it is expected that a model is not generated by a workshop, in a workshop, but rather by a signal conditioning expert that has no connection to the workshop, the measurement to be analyzed and the model to analyze with are stored on different machines.
 This means that either the measurement data has to be sent to another machine on which the service function is available or the service function has to be transfered to the workshop machine prior to the actual diagnostic work. \hfill \\
-In the demonstrator application different ideas to tackle this chanllenge shall be explored. 
+In the demonstrator application different ideas to tackle this challenge shall be explored. 
 
 \subsubsection{GUI Usability}
 While developing a new diagnostic system, the ease of use can be a contributor to a project's success.
-Auto-shop-technicians face an ever-increasing time- and efficiency- pressure, hence an efficient and effective user interface to all use-cases in the scope need to pass practical application tests inside real autoshops.
+Auto-shop-technicians face an ever-increasing time- and efficiency- pressure, hence an efficient and effective user interface to all use-cases in the scope need to pass practical application tests inside real auto shops.
 Furthermore, it must be made sure that the provided user-software is designed to be extended and forked without the necessity of refactoring.
 Therefore, the \textbf{autowerkstatt4null} project aims at an open-source-development for the demonstrator software.
 
 \subsubsection{Hardware}
 Automotive-oscilloscopes have been used for diagnostics since the 1970s already.
-The market is saturaed, meaning that there are multiple options for each usecase available to the general autoshop.
-Due to this, an evaluation of existing automotive-oscilloscopes shall be performed in order to find out whether or not availavle solutions meet the requirements of stirdiness, cost-benifit-ratio, and possibilities of intergration. \\
+The market is saturated, meaning that there are multiple options for each usecase available to the general auto shop.
+Due to this, an evaluation of existing automotive-oscilloscopes shall be performed in order to find out whether or not available solutions meet the requirements of sturdiness, cost-benefit-ratio, and possibilities of intergration. \\
 
 By proving a concept of intergration of these three layers, the project will outline a possible foundation for a next-generation off-board-diagnostics solution intergrating state-of-the-art electrical signal analysis and machine learning/artificial-intelligence capabilities.
 
@@ -396,7 +400,7 @@ This lead to interrupted data-transmission to the servers, while -due to a bug i
 All-in-all the feedback from the workshops was rather satisfying to the project team, even though minor challenges as those mentioned above were encountered.
 
 \subsection{Gathered Data}
-The gathered data is curretnly stored in a cephfs storage network located at the THGA in Bochum.
+The gathered data is currently stored in a cephfs storage network located at the THGA in Bochum.
 Right now there is no publicly available dataset, that was extracted.
 It is aimed to publicize statistics of fault-codes, usage and access to training-data within a step. 
 
@@ -418,7 +422,7 @@ Based on the \textbf{autowerkstatt4null} project result, researchers, engineers,
 implemented, and tested system shows potential to advance workshop/diagnostics in terms of specificity and ease of use.
 Given these first experimental results, two approaches will be taken to progress with further developments. 
 
-First: a clear road map of future monatization of the project and its results has to be laid out in order to provide an environment for sustainable product development. 
+First: a clear road map of future monetization of the project and its results has to be laid out in order to provide an environment for sustainable product development. 
 Even though public and private research funding is, or might be available the Auto-Intern GmbH is determined to release an early derivative of the project's hardware to the general public market. 
 This will lead to further improvements on the actual scope hardware and firmware. 
 Anyhow, due to the nature of this endeavour, and the substantial investment, thus a necessary amortization, hard- and firmware development by the Auto-Intern GmbH will be progressing in closed source. 
